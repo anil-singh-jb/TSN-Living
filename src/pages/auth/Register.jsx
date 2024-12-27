@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Container, Row, Col, Form, Button, InputGroup } from "react-bootstrap";
 import avatar from "../../assets/images/user.png";
 import firmIcon from "../../assets/images/building.png";
@@ -18,6 +18,37 @@ const Register = () => {
   const [activeForm, setForm] = useState("user");
   const [loader, setLoader] = useState(false)
   const navigate = useNavigate();
+  const [isChecked, setIsChecked] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
+  const [results, setResults] = useState([]);
+  const [sponsors] = useState(["SP123", "SP456", "SP789"]);
+
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const handleSearchChange = (e) => {
+    setSearchValue(e.target.value);
+
+    // Filter logic for sponsors
+    const filteredResults = sponsors.filter((sponsor) =>
+      sponsor.toLowerCase().includes(e.target.value.toLowerCase())
+    );
+    setResults(filteredResults);
+  };
+
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
+  };
+
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -89,6 +120,11 @@ const Register = () => {
         setLoader(false);
       }
     }
+    if (isChecked) {
+      alert("Thank you for agreeing!");
+    } else {
+      alert("Please agree to the terms before proceeding.");
+    }
     if (activeForm === "center") {
       if (!centerFormData.email && !centerFormData.fullName && !centerFormData.password && !centerFormData.phone) {
         toast.error("Please fill the data..!");
@@ -114,56 +150,107 @@ const Register = () => {
   return (
     <>
       <div className="register-main-box">
-        <Container style={{backgroundColor: "#f7f7f7"}} className="reg-form-container">
-          <Row
-            className={`p-3 ${activeForm === "user" ? "design-right" : " design-left"
-              }`}
-          >
-            <Col
-              md={7}
-              className="p-4 design-element reg-form-left"
-              style={{ opacity: activeForm === "user" ? 1 : 0 }}
-            >
-              <div className="reg-form-header">Sign Up</div>
-              <div style={{ marginTop: "10px" }}>
-                <Form>
-                  <Row>
-                    <Col md={6}>
-                      <Form.Group
-                        style={{ marginRight: "5px" }}
-                        className="mb-2"
-                      >
-                        <Form.Label htmlFor="first_name">
-                          First Name
-                        </Form.Label>
-                        <Form.Control
-                          autoFocus
-                          required
-                          type="text"
-                          name="fullName"
-                          value={formData.fullName}
-                          onChange={handleInputeChange}
-                          placeholder="First Name"
-                        />
-                      </Form.Group>
-                    </Col>
-                    <Col md={6}>
-                      <Form.Group
-                        style={{ marginLeft: "5px" }}
-                        className="mb-2"
-                      >
-                        <Form.Label htmlFor="last_name">Last Name</Form.Label>
-                        <Form.Control
-                          autoFocus
-                          required
-                          type="text"
-                          name="last name"
-                          placeholder="Last Name"
-                        />
-                      </Form.Group>
-                    </Col>
-                  </Row>
-                  <Form.Group id="email">
+        <div className="logo-box"><img src={logo} alt="" /></div>
+        <Container style={{ backgroundColor: "#f7f7f7" }} className="reg-form-container">
+          <div style={{ padding: "25px 25px" }}>
+            <div className="reg-form-header">Create Your Account</div>
+            <Form>
+
+              <hr />
+              <h4>Personal Information </h4>
+              <hr />
+
+              <Row>
+                <Col md={6}>
+                  <Form.Group
+                    style={{ marginRight: isMobile ? "0px" : "15px", }}
+                    className="mb-2"
+                  >
+                    <Form.Label htmlFor="first_name">
+                      Title
+                    </Form.Label>
+                    <Form.Control
+                      as="select"
+                      name="title"
+                      value={formData.title || ""}
+                      onChange={handleInputeChange}
+                      required
+                    >
+                      <option value="" disabled>
+                        Select Title
+                      </option>
+                      <option value="Mr.">Mr.</option>
+                      <option value="Mrs.">Mrs.</option>
+                      <option value="Sir">Ms.</option>
+                    </Form.Control>
+                  </Form.Group>
+                </Col>
+                <Col md={6}>
+                  <Form.Group
+                    style={{ marginLeft: isMobile ? "0px" : "15px", }}
+                    className="mb-2"
+                  >
+                    <Form.Label htmlFor="last_name">Marital Status</Form.Label>
+                    <Form.Control
+                      as="select"
+                      name="marital_status"
+                      value={formData.marital_status || ""}
+                      onChange={handleInputeChange}
+                      required
+                    >
+                      <option value="" disabled>
+                        Select Marital Status
+                      </option>
+                      <option value="Single">Single</option>
+                      <option value="Married">Married</option>
+                    </Form.Control>
+                  </Form.Group>
+                </Col>
+              </Row>
+
+              <Row className="mt-2">
+                <Col md={6}>
+                  <Form.Group
+                    style={{ marginRight: isMobile ? "0px" : "15px", }}
+                    className="mb-2"
+                  >
+                    <Form.Label htmlFor="first_name">
+                      First Name
+                    </Form.Label>
+                    <Form.Control
+                      autoFocus
+                      required
+                      type="text"
+                      name="fullName"
+                      value={formData.fullName}
+                      onChange={handleInputeChange}
+                      placeholder="First Name"
+                    />
+                  </Form.Group>
+                </Col>
+                <Col md={6}>
+                  <Form.Group
+                    style={{ marginLeft: isMobile ? "0px" : "15px", }}
+                    className="mb-2"
+                  >
+                    <Form.Label htmlFor="last_name">Last Name</Form.Label>
+                    <Form.Control
+                      autoFocus
+                      required
+                      type="text"
+                      name="last name"
+                      placeholder="Last Name"
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
+
+              <Row className="mt-2">
+                <Col md={6}>
+                  <Form.Group
+                    style={{ marginRight: isMobile ? "0px" : "15px", }}
+                    className="mb-2"
+                  >
                     <Form.Label htmlFor="email_id">Email</Form.Label>
                     <Form.Control
                       autoFocus
@@ -175,7 +262,36 @@ const Register = () => {
                       placeholder="Your Email"
                     />
                   </Form.Group>
-                  <Form.Group id="password">
+                </Col>
+                <Col md={6}>
+                  <Form.Group
+                    style={{ marginLeft: isMobile ? "0px" : "15px", }}
+                    className="mb-2"
+                  >
+                    <Form.Label htmlFor="mobile_number">
+                      Mobile Number
+                    </Form.Label>
+                    <Form.Control
+                      type="text"
+                      name="phone"
+                      className="form-control"
+                      inputMode="numeric"
+                      maxLength={10}
+                      pattern="[0-9]*"
+                      placeholder="Mobile Number"
+                      value={formData.phone}
+                      onChange={handleInputeChange}
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
+
+              <Row className="mt-2">
+                <Col md={6}>
+                  <Form.Group
+                    style={{ marginRight: isMobile ? "0px" : "15px", }}
+                    className="mb-2"
+                  >
                     <Form.Label htmlFor="email_id">Password</Form.Label>
                     <Form.Control
                       autoFocus
@@ -187,96 +303,318 @@ const Register = () => {
                       placeholder="Your Password"
                     />
                   </Form.Group>
-
-                  <Row>
-                    <Col xs={12}>
-                      <Form.Group
-                        // style={{ marginLeft: "5px" }}
-                        className="mb-2"
-                      >
-                        <Form.Label htmlFor="mobile_number">
-                          Mobile Number
-                        </Form.Label>
-                        <Form.Control
-                          type="text"
-                          name="phone"
-                          className="form-control"
-                          inputMode="numeric"
-                          maxLength={10}
-                          pattern="[0-9]*"
-                          placeholder="Mobile Number"
-                          value={formData.phone}
-                          onChange={handleInputeChange}
-                        />
-                      </Form.Group>
-                    </Col>
-                  </Row>
-
-                  <Button
-                    type="submit"
-                    className="login-btn"
-                    onClick={handleSubmit}
-                  >
-                    {loader ? "Process.." : "Sign Up"}
-                    <FontAwesomeIcon
-                      className="login-icon"
-                      icon={faArrowRight}
-                    />
-                  </Button>
-
-                  <div className="register-link">
-                    Already have an account?
-                    <Link style={{ marginLeft: "10px" }} to="/">
-                      Sign in
-                    </Link>
-                  </div>
-
-                </Form>
-              </div>
-            </Col>
-            <Col md={5} className="p-2 design-element  reg-form-overlay">
-              <Row>
-                <Col md={12}>
-                  <div>
-                    <img width={"200px"} src={logo} alt="User" />
-                  </div>
                 </Col>
-                <Col md={12}>
-                  <div className="reg-right-text">
-                    <h3>Your App For Navigating Family Court.</h3>
-                    <p>
-                      Learn from the top trainer and give yourself More Text
-                      Here
-                    </p>
-                  </div>
+                <Col md={6}>
+                  <Form.Group
+                    style={{ marginLeft: isMobile ? "0px" : "15px", }}
+                    className="mb-2"
+                  >
+                    <Form.Label htmlFor="email_id">Confirm Password</Form.Label>
+                    <Form.Control
+                      autoFocus
+                      required
+                      type="password"
+                      name="password"
+                      value={formData.password}
+                      onChange={handleInputeChange}
+                      placeholder="Your Password"
+                    />
+                  </Form.Group>
                 </Col>
               </Row>
-            </Col>
-          </Row>
-        </Container>
-        <Container>
-          <Row>
-            <div className="reset-text">
 
-              <Link style={{ marginLeft: "10px" }} to="/">
-                <svg
-                  fill="#000000"
-                  width="25px"
-                  height="15px"
-                  viewBox="0 0 200 250"
-                  data-name="Layer 1"
-                  id="Layer_1"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <title />
-                  <path d="M160,89.75H56l53-53a9.67,9.67,0,0,0,0-14,9.67,9.67,0,0,0-14,0l-56,56a30.18,30.18,0,0,0-8.5,18.5c0,1-.5,1.5-.5,2.5a6.34,6.34,0,0,0,.5,3,31.47,31.47,0,0,0,8.5,18.5l56,56a9.9,9.9,0,0,0,14-14l-52.5-53.5H160a10,10,0,0,0,0-20Z" />
-                </svg>
-                Back to home page
-              </Link>
+              <Row className="mt-2">
+                <Col md={6}>
+                  <Form.Group
+                    style={{ marginRight: isMobile ? "0px" : "15px", }}
+                    className="mb-2"
+                  >
+                    <Form.Label htmlFor="first_name">
+                      Nationality
+                    </Form.Label>
+                    <Form.Control
+                      as="select"
+                      name="nationality"
+                      value={formData.nationality || ""}
+                      onChange={handleInputeChange}
+                      required
+                    >
+                      <option value="" disabled>
+                        Nationality
+                      </option>
+                      <option value="Indian">Indian</option>
+                    </Form.Control>
+                  </Form.Group>
+                </Col>
+                <Col md={6}>
+                  <Form.Group
+                    style={{ marginLeft: isMobile ? "0px" : "15px", }}
+                    className="mb-2"
+                  >
+                    <Form.Label htmlFor="email_id">Date of Birth</Form.Label>
+                    <Form.Control
+                      autoFocus
+                      required
+                      type="date"
+                      name="dob"
+                      value={formData.dob}
+                      onChange={handleInputeChange}
+                      placeholder="Your Password"
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
 
-            </div>
-          </Row>
+              <hr />
+              <h4 className="mt-4">Permanent Address </h4>
+              <hr />
+
+              <Row className="mt-2">
+                <Col md={6}>
+                  <Form.Group
+                    style={{ marginRight: isMobile ? "0px" : "15px", }}
+                    className="mb-2"
+                  >
+                    <Form.Label htmlFor="first_name">
+                      House Number/Name/Street Name/Road
+                    </Form.Label>
+                    <Form.Control
+                      autoFocus
+                      required
+                      type="text"
+                      name="fullName"
+                      value={formData.fullName}
+                      onChange={handleInputeChange}
+                      placeholder="House Number/Name/Street Name/Road"
+                    />
+                  </Form.Group>
+                </Col>
+                <Col md={6}>
+                  <Form.Group
+                    style={{ marginLeft: isMobile ? "0px" : "15px", }}
+                    className="mb-2"
+                  >
+                    <Form.Label htmlFor="last_name">Locality/Area</Form.Label>
+                    <Form.Control
+                      autoFocus
+                      required
+                      type="text"
+                      name="last name"
+                      placeholder="Locality/Area"
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
+
+              <Row className="mt-2">
+                <Col md={6}>
+                  <Form.Group
+                    style={{ marginRight: isMobile ? "0px" : "15px", }}
+                    className="mb-2"
+                  >
+                    <Form.Label htmlFor="first_name">
+                      Town/Village
+                    </Form.Label>
+                    <Form.Control
+                      autoFocus
+                      required
+                      type="text"
+                      name="fullName"
+                      value={formData.fullName}
+                      onChange={handleInputeChange}
+                      placeholder="Town/Village"
+                    />
+                  </Form.Group>
+                </Col>
+                <Col md={6}>
+                  <Form.Group
+                    style={{ marginLeft: isMobile ? "0px" : "15px", }}
+                    className="mb-2"
+                  >
+                    <Form.Label htmlFor="last_name">Landmark</Form.Label>
+                    <Form.Control
+                      autoFocus
+                      required
+                      type="text"
+                      name="last name"
+                      placeholder="Landmark"
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
+
+              <Row className="mt-2">
+                <Col md={6}>
+                  <Form.Group
+                    style={{ marginRight: isMobile ? "0px" : "15px", }}
+                    className="mb-2"
+                  >
+                    <Form.Label htmlFor="first_name">
+                      Pincode
+                    </Form.Label>
+                    <Form.Control
+                      autoFocus
+                      required
+                      type="text"
+                      name="fullName"
+                      value={formData.fullName}
+                      onChange={handleInputeChange}
+                      placeholder="Pincode"
+                    />
+                  </Form.Group>
+                </Col>
+                <Col md={6}>
+                  <Form.Group
+                    style={{ marginLeft: isMobile ? "0px" : "15px", }}
+                    className="mb-2"
+                  >
+                    <Form.Label htmlFor="last_name">State</Form.Label>
+                    <Form.Control
+                      autoFocus
+                      required
+                      type="text"
+                      name="last name"
+                      placeholder="State"
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
+
+              <Row className="mt-2">
+                <Col md={6}>
+                  <Form.Group
+                    style={{ marginRight: isMobile ? "0px" : "15px", }}
+                    className="mb-2"
+                  >
+                    <Form.Label htmlFor="first_name">
+                      City
+                    </Form.Label>
+                    <Form.Control
+                      autoFocus
+                      required
+                      type="text"
+                      name="fullName"
+                      value={formData.fullName}
+                      onChange={handleInputeChange}
+                      placeholder="City"
+                    />
+                  </Form.Group>
+                </Col>
+                <Col md={6}>
+                  <Form.Group
+                    style={{ marginLeft: isMobile ? "0px" : "15px", }}
+                    className="mb-2"
+                  >
+                    <Form.Label htmlFor="last_name">Country</Form.Label>
+                    <Form.Control
+                      autoFocus
+                      required
+                      type="text"
+                      name="last name"
+                      placeholder="Country"
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
+
+              <hr />
+              <h4 className="mt-4">Choose your Forever Living Products Sponsor</h4>
+              <hr />
+
+              <Form.Group
+                style={{ marginRight: isMobile ? "0px" : "15px" }}
+                className="mb-2"
+              >
+                <Form.Label>Enter The Sponsor ID</Form.Label>
+                <Form.Control
+                  autoFocus
+                  required
+                  type="text"
+                  name="fullName"
+                  value={searchValue}
+                  onChange={handleSearchChange}
+                  placeholder="Search Sponsor ID"
+                />
+                {results.length > 0 && (
+                  <div
+                    style={{
+                      border: "1px solid #ccc",
+                      borderRadius: "4px",
+                      marginTop: "5px",
+                      maxHeight: "100px",
+                      overflowY: "auto",
+                    }}
+                  >
+                    {results.map((result, index) => (
+                      <div
+                        key={index}
+                        style={{
+                          padding: "8px",
+                          cursor: "pointer",
+                        }}
+                        onClick={() => {
+                          setSearchValue(result);
+                          setResults([]);
+                        }}
+                      >
+                        {result}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </Form.Group>
+
+              <hr style={{ marginTop: "40px" }} />
+              <h4>Communication Disclosure</h4>
+              <hr />
+
+              <p>Sharing limited contact information with others who are part of TSN’s business will help facilitate and grow your own business. Accordingly, you agree to the disclosure of the limited contact information you provide to TSN, including information regarding your TSN purchases (but excluding payment card information), to TSN's internal and authorized service providers, including TSN's independent business owners (TSNBOs). <strong> BY SUBMITTING THIS APPLICATION OR MAKING A PURCHASE, YOU ALSO AUTHORIZE TSN AND ITS TSNs TO POTENTIALLY CONTACT YOU BY PHONE, FAX, MAIL, AND/OR E-MAIL CONCERNING TSN-RELATED MATTERS.</strong></p>
+              <p><strong>UPDATING PREFERENCES :</strong> Although we recommend you continue to share limited contact information with others who are part of Forever’s business, you can visit your “Communication Preferences” and/or the “Privacy Notice” at any time to limit the use/disclosure of your contact information.</p>
+
+              <hr style={{ marginTop: "40px" }} />
+              <h4>Welcome to the Forever Family!</h4>
+              <hr />
+
+              <p>Thank you for Joining. As a Preferred Customer, you'll receive a discount every time you shop! To continue, accept the TSNBO Agreement & Annexure below.</p>
+
+              <Form.Group controlId="agreementCheckbox" className="mt-3">
+                <Form.Check
+                  type="checkbox"
+                  label="I agree to FBO Agreement & Annexure"
+                  checked={isChecked}
+                  onChange={handleCheckboxChange}
+                />
+              </Form.Group>
+
+
+              <Button
+                type="submit"
+                className="login-btn"
+                onClick={handleSubmit}
+              >
+                {loader ? "Process.." : "Sign Up"}
+                <FontAwesomeIcon
+                  className="login-icon"
+                  icon={faArrowRight}
+                />
+              </Button>
+
+              <div className="register-link">
+                Already have an account?
+                <Link style={{ marginLeft: "10px" }} to="/">
+                  Sign in
+                </Link>
+              </div>
+
+            </Form>
+          </div>
+
+
+
         </Container>
+
+        <hr />
+        <p style={{ textAlign: "center", fontSize: "14px" }}>®Copyright 2024 TSNLiving.com, All rights reserved.</p>
       </div>
     </>
   );

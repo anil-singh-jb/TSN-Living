@@ -57,7 +57,6 @@ const Login = () => {
     <>
       <div className="login-main">
         <div className="container">
-
           <div className="left-login-box">
             <div className="login-logo">
               <img  src={logo} alt="User" />
@@ -104,9 +103,9 @@ const Login = () => {
                       label="Keep me logged in"
                     />
                   </Form.Group>
-                  {/* <div>
+                  <div>
                       <a href="">Forgot Password</a>
-                    </div> */}
+                    </div>
                 </div>
 
                 {!loader ? (
@@ -131,20 +130,19 @@ const Login = () => {
                   </Button>
                 )}
 
-                {/* <div className="register-link">
+                <div className="register-link">
                   Don’t have an account yet?
                   <Link style={{ marginLeft: "10px" }} to="/register">
                     Sign up
                   </Link>
-                </div> */}
+                </div>
               </Form>
             </div>
 
           </div>
-
-
-
         </div>
+        <hr />
+        <p style={{ textAlign: "center", fontSize: "14px" }}>®Copyright 2024 TSNLiving.com, All rights reserved.</p>
       </div>
     </>
   );
