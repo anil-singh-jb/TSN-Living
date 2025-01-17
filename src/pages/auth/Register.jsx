@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Container, Row, Col, Form, Button, InputGroup } from "react-bootstrap";
 import avatar from "../../assets/images/user.png";
 import firmIcon from "../../assets/images/building.png";
-import logo from "../../assets/images/splitup-logo.png";
+import logo from "../../assets/images/logo.png";
 import "../../assets/css/Register.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";

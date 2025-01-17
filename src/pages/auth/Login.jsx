@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Form, Button, InputGroup } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import logo from "../../assets/images/splitup-logo.png";
+import logo from "../../assets/images/logo.png";
 import "../../assets/css/Login.css";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUserAsync } from "../../features/user/userThunks";
