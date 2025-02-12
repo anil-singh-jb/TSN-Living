@@ -572,15 +572,15 @@ const Register = () => {
               <p><strong>UPDATING PREFERENCES :</strong> Although we recommend you continue to share limited contact information with others who are part of Forever’s business, you can visit your “Communication Preferences” and/or the “Privacy Notice” at any time to limit the use/disclosure of your contact information.</p>
 
               <hr style={{ marginTop: "40px" }} />
-              <h4>Welcome to the Forever Family!</h4>
+              <h4>Welcome to the TSN Family!</h4>
               <hr />
 
-              <p>Thank you for Joining. As a Preferred Customer, you'll receive a discount every time you shop! To continue, accept the TSNBO Agreement & Annexure below.</p>
+              <p>Thank you for Joining. As a Preferred Customer, you'll receive a discount every time you shop! To continue, accept the TSN Agreement & Annexure below.</p>
 
               <Form.Group controlId="agreementCheckbox" className="mt-3">
                 <Form.Check
                   type="checkbox"
-                  label="I agree to FBO Agreement & Annexure"
+                  label="I agree to TSN Agreement & Annexure"
                   checked={isChecked}
                   onChange={handleCheckboxChange}
                 />
