@@ -142,7 +142,7 @@ const Login = () => {
           </div>
         </div>
         <hr />
-        <p style={{ textAlign: "center", fontSize: "14px" }}>®Copyright 2024 TSNLiving.com, All rights reserved.</p>
+        <p style={{ textAlign: "center", fontSize: "14px" }}>®Copyright {new Date().getFullYear()} TSNLiving.com, All rights reserved.</p>
       </div>
     </>
   );
