@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSelector } from "react-redux";
+import Awatar from "../assets/images/avatar_9.jpg";
 const DashboardNavbar = () => {
   const [showSidebar, setShowSidebar] = useState(true);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
@@ -69,19 +70,47 @@ const DashboardNavbar = () => {
               </button>
             </div>
 
-            <div>
-              <button className="topnavbar-btn" onClick={toggleDropdown}>
-                <Icon icon="solar:users-group-rounded-bold-duotone" />
-                <span className="topnavbar-name"> Hi.! {user?.fullName}</span>
-              </button>
+            <div style={{ display: "flex", alignItems: "center", height: "50px" }}>
+              <p className="login-time">Last Login: 22-Jan-2025 05:37:42</p>
+              <span className="topnavbar-name"> Hi.! {user?.fullName}</span>
+              <img
+                src={Awatar}
+                alt="User Avatar"
+                style={{ cursor: "pointer", borderRadius: "50%", width: "40px", height: "40px" }}
+                onClick={toggleDropdown}
+              />
               {isDropdownOpen && (
                 <div className="dropdown-content" ref={dropdownRef}>
+                  <div className="dropdown-content-profile">
+
+                    <div className="dropdown-content-profile-avatar">
+                      <img src={Awatar} alt="User Avatar" />
+                    </div>
+
+                    <div>
+                      <div className="dropdown-content-profile-name">{user?.fullName}</div>
+                      <div className="dropdown-content-profile-email">{user?.email}</div>
+                      <div className="dropdown-content-profile-email">
+                        {user?.sponser_code}
+                        <span style={{ marginLeft: "0px" }}>
+                          <button className="share-ref-btn">
+                            <Icon
+                              style={{ fontSize: "16px", color: "var(--text-color-white)", cursor: "pointer", marginRight: "5px" }}
+                              icon="material-symbols:share"
+                            /> Share Referral ID
+                          </button>
+
+                        </span>
+                      </div>
+                    </div>
+
+                  </div>
                   <ul>
-                    <li onClick={logout}>Logout</li>
+                    <li> <Icon icon="lets-icons:user-circle" width={"22"} height={"22"} /> Profile</li>
+                    <li style={{ borderRadius: "0 0 10px 10px" }} onClick={logout} > <Icon icon="material-symbols:logout-rounded" width={"22"} height={"22"} /> Logout</li>
                   </ul>
                 </div>
               )}
-              <ThemeSwitcher />
             </div>
           </div>
         </div>

@@ -1,7 +1,8 @@
 .logo-box{
   display: flex;
   justify-content: center;
-  margin: 20px 0px;
+  margin-bottom: 20px;
+  padding-top: 20px;
 }
 
 .logo-box img{
@@ -71,13 +72,17 @@
   filter: drop-shadow(0rem 0rem 0.4rem rgba(59, 27, 140, 0.8));
 }
 
+.register-main-box{
+  background-color: var(--background-color);
+  padding-bottom: 10px;
+}
+
 .reg-form-container {
   border: 1px solid #d6d7dd;
   border-radius: 25px;
   max-width: 1000px;
   margin-top: 15px;
-  margin-bottom: 10px;
-  background-color: white;
+  background-color: black;
   -webkit-box-shadow: -25px 22px 35px 1px rgba(18, 18, 18, 0.15);
   -moz-box-shadow: -25px 22px 35px 1px rgba(18, 18, 18, 0.15);
   box-shadow: -25px 22px 35px 1px rgba(18, 18, 18, 0.15);
@@ -103,6 +108,20 @@
   font-weight: 600;
   text-align: center;
   margin-bottom: 25px;
+  color: var(--primary-color);
+}
+
+hr{
+  background-color: var(--primary-color);
+  height: 2px;
+}
+
+.form-title{
+  color: var(--primary-color);
+}
+
+.rej-test-color{
+  color: var(--primary-color);
 }
 
 .form-struct {

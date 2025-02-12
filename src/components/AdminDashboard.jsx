@@ -52,96 +52,199 @@ const AdminDashboard = ({ userData }) => {
         <div className="main-conent-box mb-5">
           <div className="welcom-box">
             <div className="row">
-              <div className="col col-lg-8 col-md-8 col-sm-12">
+              <div className="col col-lg-6 col-md-12 col-sm-12">
                 <div className="welcm-msg">
                   <div className="row">
-                    <div className="col col-lg-6 col-md-6 col-sm-12">
+                    <div className="col-12 col-lg-6 col-md-12 col-sm-12">
                       <div className="welcm-left-box">
-                        <h3 className="mb-3">
+                        <h3 className="mb-3" style={{ color: "var(--primary-color)" }}>
                           Welcome back {userData?.fullName} 👋
                         </h3>
-                        <p>
-                          If you are going to use a passage of Lorem Ipsum, you
-                          need to be sure there anything.
+                        <p style={{ color: "var(--text-color-black)", fontSize: "14px" }}>
+                          REGISTRATION DATE : {new Date(userData?.createdAt).toLocaleDateString('en-GB')}
+                        </p>
+                        <p style={{ color: "var(--text-color-black)", fontSize: "14px" }}>
+                          ACTIVATION DATE : {new Date(userData?.updatedAt).toLocaleDateString('en-GB')}
+                        </p>
+                        <p style={{ color: "var(--text-color-black)", fontSize: "14px" }}>
+                          MY PACKAGE : No Active Package
                         </p>
                         {/* <button className="custom-btn-green">Go Now</button> */}
                       </div>
                     </div>
-                    <div className="col col-lg-6 col-md-6 col-sm-12">
-                      <div className="d-flex justify-content-center">
-                        <img src={dashimg} alt="" />
+                    <div className="col-12 col-lg-6 col-md-12 col-sm-12">
+                      <div className="d-flex justify-content-center h-100 align-items-center">
+                        <img width={"75%"} src={dashimg} alt="" />
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="col col-lg-4 col-md-4 col-sm-12">
+              <div className="col-12 col-lg-6 col-md-12 col-sm-12">
                 <div className="welcm-msg-right">
-                  <div className="welcm-right-box">
-                    <div className="dash-img-back d-flex justify-content-center mb-3 mt-2">
-                      {/* <img className="wlcm-img" src={userimg} alt="" /> */}
+
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <div className="dash-img-back d-flex justify-content-center">
                       <Icon
-                        icon="fa6-solid:building-user"
-                        width="80"
-                        height="80"
-                        style={{ color: "var(--primary-color)" }}
+                        icon="fa:rupee"
+                        width="50" height="50"
+                        style={{ color: "var(--text-color-white)" }}
                       />
                     </div>
-                    <h2>{totalData?.centers?.centers?.length}k</h2>
-                    <p>Customers</p>
+                    <div style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                      <h2 style={{ marginLeft: "10px" }}>Total Balance</h2>
+                      <h3 style={{ marginLeft: "10px" }}>₹0.00</h3>
+                    </div>
                   </div>
+                  <p style={{ margin: "3px 0px", color: "var(--text-color-black)", fontSize: "12px", padding: "0px" }}>
+                    Note- If any person transfers money without paying the loan amount using the loan ID, his account will be frozen.
+                  </p>
+                  <div style={{ marginTop: "5px" }}>
+                    <div className="d-flex justify-content-between align-items-center">
+                      <button className="custom-btn-fund" style={{ width: "48%" }}>+ Add Fund</button>
+                      <button className="custom-btn-fund" style={{ width: "48%", backgroundColor: "red", color: "white" }}>- Withdraw Fund</button>
+                    </div>
+                    <button className="custom-btn-fund" style={{ width: "100%", backgroundColor: "#9f9476", marginTop: "10px" }}>- Withdraw Fund</button>
+                  </div>
+
                 </div>
               </div>
             </div>
 
             <div className="row">
-              <div className="col col-lg-4 col-md-4 col-sm-12">
+              <div className="col-12 col-lg-3 col-md-3 col-sm-12">
                 <div className="theme-card">
                   <div>
-                    <h2>{totalData?.parents?.parents?.length}k</h2>
-                    <p>Category </p>
+                    <h2>₹ {totalData?.parents?.parents?.length}</h2>
+                    <p>Total Business</p>
                   </div>
-                  <div className="dash-img-back d-flex justify-content-center mb-3 mt-2">
+                  <div className="dash-img-back-mini d-flex justify-content-center mb-3 mt-2">
                     <Icon
-                      icon="solar:users-group-two-rounded-bold-duotone"
-                      width="80"
-                      height="80"
-                      style={{ color: "var(--primary-color)" }}
+                      icon="flowbite:chart-mixed-dollar-solid"
+                      width="50"
+                      height="50"
+                      style={{ color: "var(--text-color-white)" }}
                     />
                   </div>
                 </div>
               </div>
 
-              <div className="col col-lg-4 col-md-4 col-sm-12">
+              <div className="col-12 col-lg-3 col-md-3 col-sm-12">
                 <div className="theme-card">
                   <div>
-                    <h2>{applicationData?.length}k</h2>
-                    <p>All Modules </p>
+                    <h2>₹ {applicationData?.length}</h2>
+                    <p >Total Income </p>
                   </div>
-                  <div className="dash-img-back d-flex justify-content-center mb-3 mt-2">
+                  <div className="dash-img-back-mini d-flex justify-content-center mb-3 mt-2">
                     <Icon
-                      icon="lets-icons:file-dock-fill"
-                      width="80"
-                      height="80"
-                      style={{ color: "var(--primary-color)" }}
+                      icon="fa6-solid:sack-dollar"
+                      width="40"
+                      height="40"
+                      style={{ color: "var(--text-color-white)" }}
                     />
                   </div>
                 </div>
               </div>
 
-              <div className="col col-lg-4 col-md-4 col-sm-12">
+              <div className="col-12 col-lg-3 col-md-3 col-sm-12">
                 <div className="theme-card">
                   <div>
-                    <h2>{totalData?.testimonial?.testimonials?.length}k</h2>
-                    <p>Events </p>
+                    <h2 >₹ {totalData?.testimonial?.testimonials?.length}</h2>
+                    <p >Direct Income </p>
                   </div>
-                  <div className="dash-img-back d-flex justify-content-center mb-3 mt-2">
+                  <div className="dash-img-back-mini d-flex justify-content-center mb-3 mt-2">
+                    <Icon
+                      icon="fa6-solid:hand-holding-dollar"
+                      width="40"
+                      height="40"
+                      style={{ color: "var(--text-color-white)" }}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-12 col-lg-3 col-md-3 col-sm-12">
+                <div className="theme-card">
+                  <div>
+                    <h2 >₹ {totalData?.testimonial?.testimonials?.length}</h2>
+                    <p >Level Income </p>
+                  </div>
+                  <div className="dash-img-back-mini d-flex justify-content-center mb-3 mt-2">
                     <Icon
                       icon="bi:chat-left-quote-fill"
-                      width="60"
-                      height="60"
-                      style={{ color: "var(--primary-color)" }}
+                      width="40"
+                      height="40"
+                      style={{ color: "var(--text-color-white)" }}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-12 col-lg-3 col-md-3 col-sm-12">
+                <div className="theme-card">
+                  <div>
+                    <h2>₹ {totalData?.parents?.parents?.length}</h2>
+                    <p>Total Business</p>
+                  </div>
+                  <div className="dash-img-back-mini d-flex justify-content-center mb-3 mt-2">
+                    <Icon
+                      icon="flowbite:chart-mixed-dollar-solid"
+                      width="50"
+                      height="50"
+                      style={{ color: "var(--text-color-white)" }}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-12 col-lg-3 col-md-3 col-sm-12">
+                <div className="theme-card">
+                  <div>
+                    <h2>₹ {applicationData?.length}</h2>
+                    <p>Total Income </p>
+                  </div>
+                  <div className="dash-img-back-mini d-flex justify-content-center mb-3 mt-2">
+                    <Icon
+                      icon="fa6-solid:sack-dollar"
+                      width="40"
+                      height="40"
+                      style={{ color: "var(--text-color-white)" }}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-12 col-lg-3 col-md-3 col-sm-12">
+                <div className="theme-card">
+                  <div>
+                    <h2>₹ {totalData?.testimonial?.testimonials?.length}</h2>
+                    <p>Direct Income </p>
+                  </div>
+                  <div className="dash-img-back-mini d-flex justify-content-center mb-3 mt-2">
+                    <Icon
+                      icon="fa6-solid:hand-holding-dollar"
+                      width="40"
+                      height="40"
+                      style={{ color: "var(--text-color-white)" }}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-12 col-lg-3 col-md-3 col-sm-12">
+                <div className="theme-card">
+                  <div>
+                    <h2>₹ {totalData?.testimonial?.testimonials?.length}</h2>
+                    <p>Level Income </p>
+                  </div>
+                  <div className="dash-img-back-mini d-flex justify-content-center mb-3 mt-2">
+                    <Icon
+                      icon="bi:chat-left-quote-fill"
+                      width="40"
+                      height="40"
+                      style={{ color: "var(--text-color-white)" }}
                     />
                   </div>
                 </div>

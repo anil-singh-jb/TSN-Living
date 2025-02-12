@@ -1,16 +1,17 @@
 /* ============== Login & Register Page ============ */
 .login-main {
-  /* background-image: url(../images/bg1.jpg); */
-  /* background-size: cover; */
+  background-image: url(../images/section-bg-shape.png);
+  background-size: cover;
   background-size: 100% 130%;
-  /* background-position: center;
-  background-repeat: no-repeat; */
+  background-position: center;
+  background-repeat: no-repeat;
   height: 100vh;
   margin: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: var(--background-color);
 }
 
 .right-login-image {
@@ -19,8 +20,8 @@
 
 .left-login-box {
   width: 50%;
-  background: #f7f7f7;
-  padding: 75px 75px;
+  background: var(--secondary-color);
+  padding: 45px 75px;
   border-radius: 25px 25px 25px 25px;
   -webkit-box-shadow: -25px 22px 35px 1px rgba(18, 18, 18, 0.15);
   -moz-box-shadow: -25px 22px 35px 1px rgba(18, 18, 18, 0.15);
@@ -48,6 +49,7 @@
   font-style: normal;
   text-align: center;
   font-size: 40px;
+  color: var(--primary-color);
 }
 
 .form-control {
@@ -77,6 +79,7 @@
   border: none;
   border-radius: 40px;
   padding: 15px 0px;
+  color: var(--text-color-white);
   font-size: 16px;
   font-weight: 500;
   line-height: 1 !important;
@@ -95,6 +98,9 @@
   font-weight: 500;
   font-size: 13px;
   margin-top: 25px;
-  color: #a5a4a4;
+  color: var(--text-color) !important;
 }
 
+label{
+  color: var(--text-color) !important;
+}
